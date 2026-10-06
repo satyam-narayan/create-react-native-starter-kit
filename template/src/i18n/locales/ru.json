@@ -1,0 +1,165 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "done": "Готово",
+    "next": "Далее",
+    "back": "Назад",
+    "skip": "Пропустить",
+    "retry": "Повторить",
+    "ok": "ОК",
+    "yes": "Да",
+    "no": "Нет",
+    "close": "Закрыть",
+    "search": "Поиск",
+    "noResults": "Результаты не найдены",
+    "emptyState": "Пока ничего нет"
+  },
+
+  "auth": {
+    "login": "Войти",
+    "signup": "Зарегистрироваться",
+    "logout": "Выйти",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "resetPassword": "Сбросить пароль",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "phone": "Номер телефона",
+    "rememberMe": "Запомнить меня",
+    "dontHaveAccount": "Нет аккаунта?",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "createAccount": "Создать аккаунт",
+    "welcomeBack": "С возвращением!",
+    "signInToContinue": "Войдите, чтобы продолжить",
+    "enterEmail": "Введите адрес электронной почты",
+    "enterPassword": "Введите пароль",
+    "enterNewPassword": "Введите новый пароль",
+    "passwordRequirements": "Пароль должен содержать не менее 8 символов",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "invalidEmail": "Введите корректный адрес электронной почты",
+    "loginSuccess": "Вход выполнен успешно",
+    "signupSuccess": "Аккаунт успешно создан",
+    "logoutSuccess": "Вы успешно вышли из системы",
+    "resetPasswordSent": "Инструкции по сбросу пароля отправлены на вашу почту",
+    "verifyEmail": "Подтвердите email",
+    "enterVerificationCode": "Введите код подтверждения, отправленный на почту",
+    "verificationCode": "Код подтверждения",
+    "resendCode": "Отправить код повторно",
+    "didntReceiveCode": "Не получили код?",
+    "codeResent": "Код подтверждения отправлен повторно",
+    "emailVerified": "Электронная почта успешно подтверждена",
+    "setupProfile": "Настройка профиля",
+    "completeProfile": "Заполните профиль",
+    "addPhoto": "Добавить фото",
+    "bio": "О себе",
+    "tellUsAboutYourself": "Расскажите о себе"
+  },
+
+  "navigation": {
+    "home": "Главная",
+    "search": "Поиск",
+    "notifications": "Уведомления",
+    "profile": "Профиль",
+    "settings": "Настройки"
+  },
+
+  "home": {
+    "greeting": "Здравствуйте, {{name}}",
+    "welcomeBack": "С возвращением!",
+    "recentActivity": "Недавняя активность",
+    "noActivity": "Нет недавней активности",
+    "quickActions": "Быстрые действия"
+  },
+
+  "profile": {
+    "editProfile": "Редактировать профиль",
+    "myAccount": "Мой аккаунт",
+    "preferences": "Настройки",
+    "privacy": "Конфиденциальность и безопасность",
+    "appearance": "Внешний вид",
+    "notifications": "Уведомления",
+    "help": "Помощь и поддержка",
+    "about": "О приложении",
+    "termsOfService": "Условия использования",
+    "privacyPolicy": "Политика конфиденциальности",
+    "rateApp": "Оценить приложение",
+    "version": "Версия {{version}}",
+    "updateSuccess": "Профиль успешно обновлён"
+  },
+
+  "settings": {
+    "general": "Общие",
+    "account": "Аккаунт",
+    "notifications": "Уведомления",
+    "privacy": "Конфиденциальность",
+    "language": "Язык",
+    "theme": "Тема",
+    "darkMode": "Тёмная тема",
+    "lightMode": "Светлая тема",
+    "systemDefault": "Системная",
+    "changePassword": "Сменить пароль",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountWarning": "Это действие невозможно отменить. Все данные будут удалены навсегда."
+  },
+
+  "errors": {
+    "generic": "Что-то пошло не так",
+    "network": "Ошибка сети. Проверьте подключение к интернету.",
+    "server": "Ошибка сервера. Пожалуйста, попробуйте позже.",
+    "unauthorized": "Сессия истекла. Пожалуйста, войдите снова.",
+    "notFound": "Ресурс не найден",
+    "validation": "Проверьте введённые данные",
+    "invalidCredentials": "Неверный email или пароль",
+    "emailExists": "Аккаунт с таким email уже существует",
+    "weakPassword": "Пароль слишком слабый",
+    "rateLimited": "Слишком много попыток. Попробуйте позже."
+  },
+
+  "validation": {
+    "required": "Это поле обязательно",
+    "emailInvalid": "Введите корректный email",
+    "passwordTooShort": "Пароль должен содержать не менее {{min}} символов",
+    "passwordTooWeak": "Пароль должен содержать заглавную букву, строчную букву и цифру",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "phoneInvalid": "Введите корректный номер телефона",
+    "minLength": "Минимум {{min}} символов",
+    "maxLength": "Максимум {{max}} символов"
+  },
+
+  "alerts": {
+    "logoutTitle": "Выход",
+    "logoutMessage": "Вы уверены, что хотите выйти?",
+    "deleteTitle": "Удаление",
+    "deleteMessage": "Вы уверены, что хотите удалить этот элемент?",
+    "unsavedChangesTitle": "Несохранённые изменения",
+    "unsavedChangesMessage": "У вас есть несохранённые изменения. Вы уверены, что хотите выйти?"
+  },
+  "network": {
+    "unavailableTitle": "Нет подключения к интернету",
+    "unavailableMessage": "Интернет недоступен. Проверьте соединение.",
+    "unavailableBody": "Проверьте Wi-Fi или мобильные данные и попробуйте снова."
+  },
+  "imagePicker": {
+    "title": "Добавить фото",
+    "subtitle": "Выберите чёткое фото для профиля.",
+    "camera": "Сделать фото",
+    "cameraHint": "Сделайте новый снимок камерой",
+    "gallery": "Выбрать из галереи",
+    "galleryHint": "Выберите существующее фото на устройстве",
+    "docTitle": "Загрузить файл",
+    "docSubtitle": "Можно загрузить изображения, PDF и другие документы.",
+    "docCamera": "Сделать фото",
+    "docCameraHint": "Сделайте новый снимок камерой",
+    "docGallery": "Выбрать на устройстве",
+    "docGalleryHint": "Выберите изображение, PDF или другой документ"
+  }
+}

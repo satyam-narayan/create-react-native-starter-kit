@@ -1,0 +1,8 @@
+node_modules/
+*.tgz
+.DS_Store
+Thumbs.db
+.env
+__test_mock_project__/
+npm-debug.log*
+yarn-error.log*

@@ -1,0 +1,49 @@
+{
+  "name": "create-react-native-starter-kit",
+  "version": "1.0.0",
+  "description": "Create a React Native CLI app with a ready folder structure, shared components, theming, i18n, API layer, offline handling and native setup done for you",
+  "main": "bin/create-react-native-starter-kit.js",
+  "bin": {
+    "create-react-native-starter-kit": "./bin/create-react-native-starter-kit.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "scripts",
+    "template",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "sync-template": "node scripts/sync-template.js",
+    "test": "node test-patchers.js",
+    "prepack": "node scripts/sync-template.js"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-cli",
+    "starter",
+    "boilerplate",
+    "generator",
+    "scaffolder",
+    "template",
+    "starter-kit",
+    "typescript",
+    "react-navigation",
+    "redux-toolkit",
+    "tanstack-query"
+  ],
+  "author": "Satyam Narayan (https://github.com/satyam-narayan)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyam-narayan/create-react-native-starter-kit.git"
+  },
+  "homepage": "https://github.com/satyam-narayan/create-react-native-starter-kit#readme",
+  "bugs": {
+    "url": "https://github.com/satyam-narayan/create-react-native-starter-kit/issues"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

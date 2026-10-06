@@ -1,0 +1,67 @@
+diff --git a/node_modules/react-native-element-dropdown/lib/commonjs/components/Dropdown/index.js b/node_modules/react-native-element-dropdown/lib/commonjs/components/Dropdown/index.js
+index 3166ef9..cdbc26d 100644
+--- a/node_modules/react-native-element-dropdown/lib/commonjs/components/Dropdown/index.js
++++ b/node_modules/react-native-element-dropdown/lib/commonjs/components/Dropdown/index.js
+@@ -167,14 +167,14 @@ const DropdownComponent = /*#__PURE__*/_react.default.forwardRef((props, current
+         if (mode === 'auto') {
+           isFull = false;
+         }
+-        const top = isFull ? 20 : height + pageY + 2;
++        const top = isFull ? 20 : height + pageY;
+         const bottom = H - top + height;
+         const left = _reactNative.I18nManager.isRTL ? W - width - pageX : pageX;
+         setPosition({
+           isFull,
+           width: Math.floor(width),
+-          top: Math.floor(top + statusBarHeight),
+-          bottom: Math.floor(bottom - statusBarHeight),
++          top: Math.floor(top),
++          bottom: Math.floor(bottom),
+           left: Math.floor(left),
+           height: Math.floor(height)
+         });
+diff --git a/node_modules/react-native-element-dropdown/lib/module/components/Dropdown/index.js b/node_modules/react-native-element-dropdown/lib/module/components/Dropdown/index.js
+index 914d4d1..213f70b 100644
+--- a/node_modules/react-native-element-dropdown/lib/module/components/Dropdown/index.js
++++ b/node_modules/react-native-element-dropdown/lib/module/components/Dropdown/index.js
+@@ -159,14 +159,14 @@ const DropdownComponent = /*#__PURE__*/React.forwardRef((props, currentRef) => {
+         if (mode === 'auto') {
+           isFull = false;
+         }
+-        const top = isFull ? 20 : height + pageY + 2;
++        const top = isFull ? 20 : height + pageY;
+         const bottom = H - top + height;
+         const left = I18nManager.isRTL ? W - width - pageX : pageX;
+         setPosition({
+           isFull,
+           width: Math.floor(width),
+-          top: Math.floor(top + statusBarHeight),
+-          bottom: Math.floor(bottom - statusBarHeight),
++          top: Math.floor(top),
++          bottom: Math.floor(bottom),
+           left: Math.floor(left),
+           height: Math.floor(height)
+         });
+diff --git a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+index 2a73f2f..55d0da5 100644
+--- a/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
++++ b/node_modules/react-native-element-dropdown/src/components/Dropdown/index.tsx
+@@ -201,15 +201,15 @@ const DropdownComponent = React.forwardRef<IDropdownRef, DropdownProps<any>>(
+             isFull = false;
+           }
+ 
+-          const top = isFull ? 20 : height + pageY + 2;
++          const top = isFull ? 20 : height + pageY;
+           const bottom = H - top + height;
+           const left = I18nManager.isRTL ? W - width - pageX : pageX;
+ 
+           setPosition({
+             isFull,
+             width: Math.floor(width),
+-            top: Math.floor(top + statusBarHeight),
+-            bottom: Math.floor(bottom - statusBarHeight),
++            top: Math.floor(top),
++            bottom: Math.floor(bottom),
+             left: Math.floor(left),
+             height: Math.floor(height),
+           });
