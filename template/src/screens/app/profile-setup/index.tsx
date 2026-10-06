@@ -54,10 +54,9 @@ const ProfileSetup = ({ navigation }: Props) => {
   };
   return (
     <KeyboardAvoidingView
-      style={[layout.flexContainer,{paddingBottom:bottom+spacing.sm}]}
+      style={layout.flexContainer}
       behavior={isIOS ? 'padding' : 'height'}
       keyboardVerticalOffset={isIOS ? 64 : 0}
-      contentContainerStyle={{flexGrow:1}}
     >
       <ScrollView showsVerticalScrollIndicator={false}>
       <FormInput
@@ -148,12 +147,14 @@ const ProfileSetup = ({ navigation }: Props) => {
       />
 
     </ScrollView>
+      {/* KeyboardAvoidingView overrides its own paddingBottom, so the inset is a margin here. */}
       <CustomButton
         title={t('common.continue')}
         onPress={handleSubmit(handleContinue)}
         variant="primary"
         fullWidth
-        />
+        containerStyle={{ marginTop: spacing.sm, marginBottom: bottom + spacing.sm }}
+      />
     </KeyboardAvoidingView>
   );
 };

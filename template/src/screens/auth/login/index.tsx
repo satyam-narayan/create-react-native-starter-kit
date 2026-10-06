@@ -52,6 +52,7 @@ const Login = ({ navigation }: Props) => {
         weight="600"
         textColor={color.text_primary}
         textAlign="center"
+        style={layout.marginBottomLg}
       >
         {t('auth.welcome-back')}
       </CustomText>
@@ -69,8 +70,8 @@ const Login = ({ navigation }: Props) => {
           field: t('auth.email'),
         })}
         variant="text"
-        isTooltip
-        tooltipMessage='We"ll never share your email with anyone else.'
+        // isTooltip
+        // tooltipMessage='We"ll never share your email with anyone else.'
       />
 
       <FormInput

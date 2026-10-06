@@ -1,7 +1,7 @@
 # create-react-native-starter-kit
 
 [![npm version](https://img.shields.io/npm/v/create-react-native-starter-kit.svg)](https://www.npmjs.com/package/create-react-native-starter-kit)
-[![license](https://img.shields.io/npm/l/create-react-native-starter-kit.svg)](./LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![GitHub](https://img.shields.io/badge/GitHub-satyam--narayan-181717?logo=github)](https://github.com/satyam-narayan/create-react-native-starter-kit)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://www.buymeacoffee.com/satyamnarayan)
 

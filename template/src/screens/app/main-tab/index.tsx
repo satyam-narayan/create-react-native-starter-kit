@@ -57,7 +57,7 @@ const MainTabs = ({ navigation }: props) => {
           overrideVariantColor: color.border,
           overrideVariantTextColor: color.text_secondary,
         }}
-        icon="clock"
+        icon="log_out"
         onPressPrimaryBtn={() => {
           setIsAlertOpen(false);
           handleLogout();

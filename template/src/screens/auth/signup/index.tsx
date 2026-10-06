@@ -42,6 +42,7 @@ const Signup = ({ navigation }: Props) => {
         weight="600"
         textColor={color.text_primary}
         textAlign="center"
+        style={layout.marginBottomLg}
       >
         {t('auth.lets-get-started')}
       </CustomText>

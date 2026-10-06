@@ -4,7 +4,7 @@
   "description": "Create a React Native CLI app with a ready folder structure, shared components, theming, i18n, API layer, offline handling and native setup done for you",
   "main": "bin/create-react-native-starter-kit.js",
   "bin": {
-    "create-react-native-starter-kit": "./bin/create-react-native-starter-kit.js"
+    "create-react-native-starter-kit": "bin/create-react-native-starter-kit.js"
   },
   "files": [
     "bin",

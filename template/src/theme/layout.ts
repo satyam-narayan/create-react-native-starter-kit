@@ -19,4 +19,5 @@ export const layout = StyleSheet.create({
   separator: { height: 1, marginVertical: spacing.md },
   marginTopMd: { marginTop: spacing.md },
   marginBottomMd: { marginBottom: spacing.md },
+  marginBottomLg: { marginBottom: spacing.lg },
 });

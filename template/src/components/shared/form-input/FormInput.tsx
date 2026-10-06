@@ -9,6 +9,7 @@ import { useAppTheme } from '@/context/ThemeContext';
 import Icon from '../Icon';
 import { isIOS } from '@/constants/device';
 import { FORM_FIELD } from './formFieldStyles';
+import { spacing } from '@/theme';
 
 const FormInput = <T extends FieldValues>({
   control,
@@ -112,7 +113,7 @@ export default FormInput;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: 0,
+    marginBottom: spacing.md,
   },
   labelCont: {
     flexDirection: 'row',

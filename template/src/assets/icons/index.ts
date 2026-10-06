@@ -8,6 +8,7 @@ import Eye from './eye.svg';
 import EyeClose from './eyeClose.svg';
 import Folder from './folder.svg';
 import Home from './home.svg';
+import Log_out from './log_out.svg';
 import Setting from './setting.svg';
 import Tooltip_dark from './tooltip_dark.svg';
 import Tooltip_light from './tooltip_light.svg';
@@ -24,6 +25,7 @@ export const Icons = {
   eyeClose: EyeClose,
   folder: Folder,
   home: Home,
+  log_out: Log_out,
   setting: Setting,
   tooltip_dark: Tooltip_dark,
   tooltip_light: Tooltip_light,

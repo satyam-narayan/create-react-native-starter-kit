@@ -99,6 +99,87 @@ networkTimeout=10000
 </dict>
 </plist>`
   );
+  fs.writeFileSync(
+    path.join(iosProjectDir, 'AppDelegate.swift'),
+    `import UIKit
+import React
+import React_RCTAppDelegate
+import ReactAppDependencyProvider
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  var window: UIWindow?
+
+  var reactNativeDelegate: ReactNativeDelegate?
+  var reactNativeFactory: RCTReactNativeFactory?
+
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+  ) -> Bool {
+    let delegate = ReactNativeDelegate()
+    let factory = RCTReactNativeFactory(delegate: delegate)
+    delegate.dependencyProvider = RCTAppDependencyProvider()
+
+    reactNativeDelegate = delegate
+    reactNativeFactory = factory
+
+    window = UIWindow(frame: UIScreen.main.bounds)
+
+    factory.startReactNative(
+      withModuleName: "mockproject",
+      in: window,
+      launchOptions: launchOptions
+    )
+
+    return true
+  }
+}
+
+class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
+  override func sourceURL(for bridge: RCTBridge) -> URL? {
+    self.bundleURL()
+  }
+}
+`
+  );
+  const xcodeprojDir = path.join(TEST_DIR, 'ios', 'mockproject.xcodeproj');
+  fs.mkdirSync(xcodeprojDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(xcodeprojDir, 'project.pbxproj'),
+    `// !$*UTF8*$!
+{
+\tobjects = {
+
+/* Begin PBXBuildFile section */
+\t\t761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+\t\t761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = mockproject/AppDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+\t\t13B07FAE1A68108700A75B9A /* mockproject */ = {
+\t\t\tisa = PBXGroup;
+\t\t\tchildren = (
+\t\t\t\t761780EC2CA45674006654EE /* AppDelegate.swift */,
+\t\t\t);
+\t\t};
+/* End PBXGroup section */
+
+/* Begin PBXSourcesBuildPhase section */
+\t\t13B07F871A680F5B00A75B9A /* Sources */ = {
+\t\t\tisa = PBXSourcesBuildPhase;
+\t\t\tfiles = (
+\t\t\t\t761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+\t\t\t);
+\t\t};
+/* End PBXSourcesBuildPhase section */
+\t};
+}
+`
+  );
 
   // Test 2: Copy src folder
   console.log('\nTest 2: Copy src/ directory & sanitize imports');
@@ -198,6 +279,24 @@ networkTimeout=10000
   assert(infoPlist.includes('NSPhotoLibraryUsageDescription'), 'Info.plist has Photo library permission');
   assert(infoPlist.includes('NSCameraUsageDescription'), 'Info.plist has Camera permission');
   assert(infoPlist.includes('UIAppFonts'), 'Info.plist has UIAppFonts');
+  assert(infoPlist.includes('$(PRODUCT_MODULE_NAME).SceneDelegate'), 'Info.plist registers the SceneDelegate');
+  assert(/<\/dict>\s*<\/dict>\s*<\/plist>\s*$/.test(infoPlist), 'Info.plist scene manifest is inside the root dict');
+
+  const appDelegate = fs.readFileSync(path.join(iosProjectDir, 'AppDelegate.swift'), 'utf8');
+  assert(!appDelegate.includes('UIWindow') && !appDelegate.includes('RCTReactNativeFactory'), 'AppDelegate no longer starts React Native');
+
+  const sceneDelegate = fs.readFileSync(path.join(iosProjectDir, 'SceneDelegate.swift'), 'utf8');
+  assert(sceneDelegate.includes('class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate'), 'SceneDelegate.swift is created');
+  assert(sceneDelegate.includes('withModuleName: "mockproject"'), 'SceneDelegate starts the app module');
+  assert(sceneDelegate.includes('UIWindow(windowScene: windowScene)'), 'SceneDelegate creates the window from the scene');
+
+  const pbxproj = fs.readFileSync(path.join(xcodeprojDir, 'project.pbxproj'), 'utf8');
+  assert.strictEqual((pbxproj.match(/SceneDelegate\.swift in Sources/g) || []).length, 2, 'pbxproj has SceneDelegate build file and Sources entry');
+  assert(pbxproj.includes('path = mockproject/SceneDelegate.swift; sourceTree = "<group>"'), 'pbxproj has SceneDelegate file reference');
+  assert(/^\t\t\t\t[0-9A-F]{24} \/\* SceneDelegate\.swift \*\/,$/m.test(pbxproj), 'SceneDelegate is in the app group');
+
+  const { patchIOSSceneLifecycle } = require('./lib/patch-native');
+  assert.strictEqual(patchIOSSceneLifecycle(TEST_DIR), false, 'UIScene patch is idempotent');
   console.log('✅ Passed Test 5: All Android and iOS native files patched');
 
   // Clean up mock directory
