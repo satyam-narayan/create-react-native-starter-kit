@@ -50,7 +50,6 @@ async function main() {
   let projectName = null;
   const options = {
     packageManager: 'yarn',
-    useLatest: false,
     skipInstall: false,
     skipPods: false,
     dryRun: false,
@@ -61,8 +60,6 @@ async function main() {
       options.packageManager = 'npm';
     } else if (arg === '--yarn') {
       options.packageManager = 'yarn';
-    } else if (arg === '--latest') {
-      options.useLatest = true;
     } else if (arg === '--skip-install') {
       options.skipInstall = true;
     } else if (arg === '--skip-pods') {

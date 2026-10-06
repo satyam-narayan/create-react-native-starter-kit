@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/create-react-native-starter-kit.svg)](https://www.npmjs.com/package/create-react-native-starter-kit)
 [![license](https://img.shields.io/npm/l/create-react-native-starter-kit.svg)](./LICENSE)
 [![GitHub](https://img.shields.io/badge/GitHub-satyam--narayan-181717?logo=github)](https://github.com/satyam-narayan/create-react-native-starter-kit)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://www.buymeacoffee.com/satyamnarayan)
 
 Create a React Native CLI app that is ready for screen design on day one.
 
@@ -35,7 +36,8 @@ npx create-react-native-starter-kit MyApp
 - [Environment variables](#environment-variables)
 - [Useful scripts](#useful-scripts)
 - [Troubleshooting](#troubleshooting)
-- [Development and publishing (maintainers)](#development-and-publishing-maintainers)
+- [Contributing](#contributing)
+- [Support](#support)
 - [License](#license)
 
 ---
@@ -48,7 +50,7 @@ Your machine must be set up for React Native CLI development (see the [official 
 - Yarn (default) or npm
 - Android Studio, Android SDK and JDK 17 for Android
 - Xcode and CocoaPods for iOS (macOS only)
-- Internet connection (the React Native template and all libraries are downloaded at their latest versions)
+- Internet connection (the React Native template and all libraries are downloaded from npm)
 
 > **Note:** If you previously installed a global `react-native-cli` or `@react-native-community/cli` package, remove it first, as recommended in the [React Native docs](https://reactnative.dev/docs/getting-started-without-a-framework). A global install can cause unexpected issues.
 >
@@ -56,7 +58,7 @@ Your machine must be set up for React Native CLI development (see the [official 
 > npm uninstall -g react-native-cli @react-native-community/cli
 > ```
 >
-> This CLI creates the base app with `npx @react-native-community/cli@latest init`, the same command the docs use, so you always start on the latest React Native.
+> This CLI creates the base app with `npx @react-native-community/cli@latest init`, the same command the docs use, so you always start on the latest stable React Native.
 
 ## Create a project
 
@@ -108,7 +110,7 @@ Replace the dummy parts with your real logic when you are ready: `handleLogin` i
 
 ## What the CLI does
 
-1. Creates a bare app with `@react-native-community/cli init` (latest React Native).
+1. Creates a bare app with `@react-native-community/cli init` (latest stable React Native).
 2. Copies the starter `src/`, `patches/` and `.env.example` into it.
 3. Installs the starter libraries (latest versions).
 4. Writes `babel.config.js` (`@/` alias, env variables, worklets), `metro.config.js` (SVG as components), `tsconfig.json` paths, `react-native.config.js` (fonts), `declarations.d.ts` and `App.tsx`.
@@ -362,55 +364,15 @@ Values are inlined at build time (`process.env.API_BASE_URL`). Restart Metro wit
 
 ---
 
-## Development and publishing (maintainers)
-
-### Project layout
-
-```text
-bin/create-react-native-starter-kit.js   CLI entry (argument parsing, help)
-lib/creator.js                           Orchestrates all steps
-lib/deps.js                              Libraries installed into every new app (latest versions)
-lib/copy-src.js                          Copies template files into the new app
-lib/patch-configs.js                     babel, metro, tsconfig, env, App.tsx, scripts
-lib/patch-native.js                      Android and iOS native changes
-template/                                The starter app copied into every new project (src/, patches/, .env.example)
-scripts/sync-template.js                 Refreshes template/ from the parent starter repo
-test-patchers.js                         Tests for the patchers (npm test)
-```
-
-`template/` is committed to the repository, so this folder works and publishes on its own.
-
-### Change the starter app
-
-- **This folder as its own repository:** edit the files inside `template/` directly.
-- **This folder inside the starter app repository:** change the app in the parent `src/`, then run `npm run sync-template` to copy `../src`, `../patches` and `../.env.example` into `template/`. This also runs automatically before `npm pack` / `npm publish`. When there is no parent app, the sync keeps `template/` as is.
-
-Add or remove a library in `lib/deps.js` whenever the template starts or stops using it.
-
-### Test locally
-
-```bash
-npm test                                    # patcher tests
-npm link                                    # makes the command available on your machine
-create-react-native-starter-kit MyApp --dry-run
-create-react-native-starter-kit MyApp       # full run
-npm unlink -g create-react-native-starter-kit
-```
-
-To test exactly what users will download: `npm pack`, then in another folder run `npx /path/to/create-react-native-starter-kit-<version>.tgz MyApp`.
-
-### Publish to npm
-
-```bash
-npm login
-npm version patch       # bug fix: 1.0.0 → 1.0.1 (use minor / major for bigger changes)
-npm publish
-git push --follow-tags
-```
-
 ## Contributing
 
-Bug reports and pull requests are welcome on [GitHub](https://github.com/satyam-narayan/create-react-native-starter-kit/issues).
+Bug reports and pull requests are welcome on [GitHub](https://github.com/satyam-narayan/create-react-native-starter-kit/issues). See [CONTRIBUTING.md](https://github.com/satyam-narayan/create-react-native-starter-kit/blob/main/CONTRIBUTING.md) for the project layout and how to test changes locally.
+
+## Support
+
+If this starter kit saves you time, you can support its development:
+
+<a href="https://www.buymeacoffee.com/satyamnarayan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="50"></a>
 
 ## License
 
