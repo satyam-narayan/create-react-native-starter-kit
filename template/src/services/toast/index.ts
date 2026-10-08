@@ -1,3 +1,4 @@
 export * from './toast';
-export * from './ToastCard';
-export * from './ToastConfig';
+export { default as ToastHost } from './ToastHost';
+export { hideToast, showToast } from './toastStore';
+export type { ToastAction, ToastConfig, ToastVariant } from './toastStore';

@@ -11,7 +11,7 @@ import React, {
 import NetInfo, { type NetInfoState } from '@react-native-community/netinfo';
 import { useTranslation } from 'react-i18next';
 import { setupOnlineManager } from '@/services/network';
-import { ErrorToast } from '@/services/toast';
+import { OfflineToast } from '@/services/toast';
 
 type NetworkContextValue = {
   isConnected: boolean;
@@ -51,10 +51,7 @@ export const NetworkProvider = ({ children }: Props) => {
 
       if (shouldToast && !toastShownForOfflineRef.current) {
         toastShownForOfflineRef.current = true;
-        ErrorToast({
-          title: t('network.unavailableTitle'),
-          message: t('network.unavailableMessage'),
-        });
+        OfflineToast({ message: t('network.unavailableMessage') });
       }
 
       if (online) {

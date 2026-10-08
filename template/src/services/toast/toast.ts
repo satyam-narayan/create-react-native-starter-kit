@@ -1,68 +1,62 @@
-import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { IconName } from '@/assets/icons';
 import i18n from '@/i18n';
-
-type AtLeastOne<T, Keys extends keyof T = keyof T> = Partial<T> &
-  { [K in Keys]-?: Required<Pick<T, K>> }[Keys];
-
-type IconProps = {
-  leftIcon?: IconName;
-  rightIcon?: IconName;
-};
+import { showToast, type ToastAction, type ToastVariant } from './toastStore';
 
 type BaseToastArgs = {
   title?: string;
   message?: string;
+  action?: ToastAction;
+  duration?: number;
 };
 
-type ToastWithIconArgs = BaseToastArgs & {
-  icons: AtLeastOne<IconProps>;
+type IconToastArgs = BaseToastArgs & {
+  /** Replaces the status glyph in the left badge. */
+  icon?: IconName;
 };
 
-const DEFAULT_OPTIONS: Omit<ToastShowParams, 'props' | 'type'> = {
-  position: 'top' as const,
-  visibilityTime: 4000,
-  autoHide: true,
-  topOffset: 50,
-  avoidKeyboard: true,
+type ContextToastArgs = IconToastArgs & {
+  thumbnailUri?: string;
 };
 
-const showToast = (
-  type: ToastShowParams['type'],
+const show = (
+  variant: ToastVariant,
   defaultTitle: string,
-  args: BaseToastArgs,
-  icons?: ToastWithIconArgs['icons'],
+  { title, message, action, duration }: BaseToastArgs,
+  extra?: { icon?: IconName; thumbnailUri?: string },
 ) => {
-  const resolvedTitle = args.title ?? defaultTitle;
+  const resolvedTitle = title ?? defaultTitle;
 
-  if (!resolvedTitle && !args.message) {
+  if (!resolvedTitle && !message) {
     __DEV__ && console.warn('[Toast] title or message should be provided');
     return;
   }
 
-  Toast.show({
-    ...DEFAULT_OPTIONS,
-    type,
-    text1: resolvedTitle,
-    text2: args.message,
-    props: icons,
+  showToast({
+    variant,
+    title: resolvedTitle,
+    message,
+    action,
+    duration,
+    ...extra,
   });
 };
 
-export const SuccessToast = (args: BaseToastArgs) =>
-  showToast('success', i18n.t('common.success'), args);
+export const SuccessToast = ({ icon, ...args }: IconToastArgs) =>
+  show('success', i18n.t('common.success'), args, { icon });
 
-export const ErrorToast = (args: BaseToastArgs) =>
-  showToast('error', i18n.t('common.error'), args);
+export const ErrorToast = ({ icon, ...args }: IconToastArgs) =>
+  show('error', i18n.t('common.error'), args, { icon });
 
-export const InfoToast = (args: BaseToastArgs) =>
-  showToast('info', i18n.t('common.info'), args);
+export const InfoToast = ({ icon, ...args }: IconToastArgs) =>
+  show('info', i18n.t('common.info'), args, { icon });
 
-export const SuccessToastWithIcon = (args: ToastWithIconArgs) =>
-  showToast('successWithIcon', i18n.t('common.success'), args, args.icons);
+/** "You're offline" toast with a wifi-off glyph. */
+export const OfflineToast = (args: BaseToastArgs) =>
+  show('offline', i18n.t('network.unavailableTitle'), args);
 
-export const ErrorToastWithIcon = (args: ToastWithIconArgs) =>
-  showToast('errorWithIcon', i18n.t('common.error'), args, args.icons);
-
-export const InfoToastWithIcon = (args: ToastWithIconArgs) =>
-  showToast('infoWithIcon', i18n.t('common.info'), args, args.icons);
+/** Context toast (clipboard, preview, etc.) with an icon or thumbnail on the left. */
+export const ContextToast = ({
+  icon,
+  thumbnailUri,
+  ...args
+}: ContextToastArgs) => show('info', '', args, { icon, thumbnailUri });

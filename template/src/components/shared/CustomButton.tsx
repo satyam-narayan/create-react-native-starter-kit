@@ -1,6 +1,6 @@
 import { useNetwork } from '@/context/NetworkContext';
 import { useAppTheme } from '@/context/ThemeContext';
-import { ErrorToast } from '@/services/toast';
+import { OfflineToast } from '@/services/toast';
 import Haptics from '@mhpdev/react-native-haptics';
 import React, { memo, useRef, useCallback, ReactNode, useMemo } from 'react';
 import {
@@ -103,10 +103,7 @@ const CustomButton = ({
     if (pressLock.current || disabled || loading) return;
 
     if (isNetworkBlocked) {
-      ErrorToast({
-        title: t('network.unavailableTitle'),
-        message: t('network.unavailableMessage'),
-      });
+      OfflineToast({ message: t('network.unavailableMessage') });
       return;
     }
 

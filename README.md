@@ -142,7 +142,7 @@ src/
 │   ├── errors/             ErrorHandler and status / backend error maps
 │   ├── network/            TanStack Query online manager
 │   ├── query/              QueryClient
-│   └── toast/              Success / Error / Info toasts and custom ToastCard
+│   └── toast/              Built-in animated toasts (Success / Error / Info / Offline / Context)
 ├── storage/ store/         MMKV storage, Redux store with redux-persist
 ├── theme/                  palette, light / dark colors, spacing, typography, fonts, layout helpers
 ├── types/                  API, navigation and env types
@@ -165,7 +165,7 @@ import { useAppTheme } from '@/context/ThemeContext';
 | State | `@reduxjs/toolkit`, `react-redux`, `redux-persist`, `react-native-mmkv` |
 | Server data | `@tanstack/react-query`, `axios`, `@react-native-community/netinfo` |
 | Forms | `react-hook-form`, `yup`, `@hookform/resolvers` |
-| UI | `@gorhom/bottom-sheet`, `react-native-reanimated`, `react-native-gesture-handler`, `react-native-svg`, `react-native-linear-gradient`, `react-native-reanimated-skeleton`, `react-native-toast-message`, `@d11/react-native-fast-image` |
+| UI | `@gorhom/bottom-sheet`, `react-native-reanimated`, `react-native-gesture-handler`, `react-native-svg`, `react-native-linear-gradient`, `react-native-reanimated-skeleton`, `@d11/react-native-fast-image` |
 | Inputs | `react-native-element-dropdown`, `@react-native-community/datetimepicker`, `rn-international-phone-number`, `react-native-walkthrough-tooltip` |
 | Media | `react-native-image-picker`, `@react-native-documents/picker`, `@bam.tech/react-native-image-resizer` |
 | Other | `i18next`, `react-i18next`, `moment`, `@mhpdev/react-native-haptics` |
@@ -285,14 +285,18 @@ Copy these two files as the template for every new feature.
 ### 5. Toasts and errors
 
 ```ts
-import { SuccessToast, ErrorToast, InfoToast } from '@/services/toast';
+import { SuccessToast, ErrorToast, InfoToast, ContextToast } from '@/services/toast';
 import { ErrorHandler } from '@/services/errors';
 
 SuccessToast({ message: 'Saved' });
+ErrorToast({ message: 'Upload failed', action: { label: 'Retry', onPress: retry } });
+ContextToast({ icon: 'folder', message: 'File saved to Downloads' });
 ErrorHandler(error); // maps HTTP / backend errors to a readable toast
 ```
 
-Going offline shows a toast automatically (`NetworkContext`). Read the network state anywhere with `useNetwork()` (`isOffline`, `refresh`).
+Toasts are built in (no toast library). `ToastHost` in `App.tsx` renders one toast at a time: it opens from a dot, shows a countdown ring, pauses while held, and closes on tap or swipe up. Pass `icon`, `thumbnailUri`, `action` or `duration` to customise it.
+
+Going offline shows an `OfflineToast` automatically (`NetworkContext`). Read the network state anywhere with `useNetwork()` (`isOffline`, `refresh`).
 
 ### 6. Theme, fonts and icons
 

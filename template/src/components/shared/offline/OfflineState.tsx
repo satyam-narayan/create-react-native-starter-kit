@@ -15,7 +15,7 @@ import CustomButton from '@/components/shared/CustomButton';
 import CustomText from '@/components/shared/text/CustomText';
 import { useNetwork } from '@/context/NetworkContext';
 import { useAppTheme } from '@/context/ThemeContext';
-import { ErrorToast } from '@/services/toast';
+import { OfflineToast } from '@/services/toast';
 import { ColorType, spacing } from '@/theme';
 import { normalize } from '@/utils/normalize';
 import BrokenWifiAnimation, {
@@ -114,10 +114,7 @@ const OfflineState = ({
       const online = await refresh();
       if (!online) {
         shakeRetry();
-        ErrorToast({
-          title: t('network.unavailableTitle'),
-          message: t('network.unavailableMessage'),
-        });
+        OfflineToast({ message: t('network.unavailableMessage') });
       }
     } finally {
       setChecking(false);
