@@ -1,6 +1,6 @@
 {
   "name": "create-react-native-starter-kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create a React Native CLI app with a ready folder structure, shared components, theming, i18n, API layer, offline handling and native setup done for you",
   "main": "bin/create-react-native-starter-kit.js",
   "bin": {
